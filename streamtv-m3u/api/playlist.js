@@ -74,8 +74,7 @@ export default async function handler(req, res) {
 
   // Cache for 1 hour in Vercel CDN
   res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate=600');
-  res.setHeader('Content-Type', 'application/x-mpegurl; charset=utf-8');
-  res.setHeader('Content-Disposition', 'inline; filename="streamtv.m3u"');
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
 
   try {
     const results = await Promise.allSettled(
