@@ -2,81 +2,83 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StreamTV M3U</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StreamTV</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: system-ui, sans-serif; background: #0a0a0f; color: #f0f0f8; min-height: 100vh; padding: 24px 16px; }
-.wrap { max-width: 640px; margin: 0 auto; }
-h1 { font-size: 26px; font-weight: 700; margin-bottom: 4px; }
-.sub { color: #9090b0; font-size: 14px; margin-bottom: 28px; }
-.card { background: #13131e; border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
-.card-title { font-size: 12px; color: #9090b0; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; }
-.url-row { display: flex; gap: 8px; align-items: center; }
-.url-box { flex: 1; background: #0a0a0f; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px 14px; font-family: monospace; font-size: 13px; color: #58c4a0; word-break: break-all; }
-.copy-btn { background: #e84545; border: none; color: #fff; padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; flex-shrink: 0; }
-.copy-btn:hover { background: #c83535; }
-.copy-btn.done { background: #1d9e75; }
-.cats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
-.cat { background: #0e0e18; border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; }
-.cat-icon { font-size: 16px; }
-.cat-name { font-size: 12px; color: #c0c0d8; }
-.steps { display: flex; flex-direction: column; gap: 12px; }
-.step { display: flex; gap: 12px; align-items: flex-start; }
-.num { background: rgba(232,69,69,0.15); color: #e84545; border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
-.step p { font-size: 13px; line-height: 1.6; color: #c0c0d8; }
-.badge { display: inline-block; background: rgba(255,255,255,0.08); padding: 1px 7px; border-radius: 4px; font-size: 11px; font-family: monospace; }
-.note { background: rgba(232,69,69,0.08); border: 1px solid rgba(232,69,69,0.2); border-radius: 8px; padding: 12px 14px; font-size: 12px; color: #f09090; line-height: 1.6; margin-top: 12px; }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;background:#0a0a0f;color:#f0f0f8;padding:32px 16px;min-height:100vh}
+.wrap{max-width:600px;margin:0 auto}
+h1{font-size:28px;font-weight:700;margin-bottom:6px}
+.sub{color:#888;font-size:14px;margin-bottom:32px}
+.card{background:#13131e;border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:22px;margin-bottom:16px}
+.label{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.url{background:#07070d;border:1px solid rgba(255,255,255,0.09);border-radius:8px;padding:12px 14px;font-family:monospace;font-size:13px;color:#4ecfa0;word-break:break-all;margin-bottom:10px}
+.btn{display:block;width:100%;background:#e84545;border:none;color:#fff;padding:11px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:6px}
+.btn:hover{background:#c83535}
+.btn.ok{background:#1a9e70}
+.btn2{display:block;width:100%;background:transparent;border:1px solid rgba(255,255,255,0.12);color:#aaa;padding:10px;border-radius:8px;font-size:13px;cursor:pointer}
+.btn2:hover{background:rgba(255,255,255,0.05)}
+.cats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cat{background:#0d0d18;border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:9px 12px;font-size:12px;color:#bbb;display:flex;align-items:center;gap:6px}
+.steps li{font-size:13px;color:#bbb;line-height:1.8;margin-left:18px}
+.note{background:rgba(255,180,0,0.07);border:1px solid rgba(255,180,0,0.2);border-radius:8px;padding:12px;font-size:12px;color:#d4a84b;line-height:1.7;margin-top:12px}
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>StreamTV M3U</h1>
-  <p class="sub">Tamil · English · India · Movies · Series · Sports · News</p>
+  <p class="sub">Tamil · English · India · Movies · Series · News · Sports</p>
+
   <div class="card">
-    <div class="card-title">Your M3U playlist URL</div>
-    <div class="url-row">
-      <div class="url-box" id="m3u-url"></div>
-      <button class="copy-btn" id="copy-btn" onclick="copyURL()">Copy</button>
-    </div>
+    <div class="label">M3U Playlist URL — paste this into your STB app</div>
+    <div class="url" id="u1"></div>
+    <button class="btn" onclick="copy('u1',this)">Copy URL</button>
+    <div class="url" id="u2" style="margin-top:10px"></div>
+    <button class="btn2" onclick="copy('u2',this)">Copy .m3u version (if above doesn't work)</button>
   </div>
+
   <div class="card">
-    <div class="card-title">Categories included</div>
+    <div class="label">Categories in this playlist</div>
     <div class="cats">
-      <div class="cat"><span class="cat-icon">🎭</span><span class="cat-name">Tamil Live TV</span></div>
-      <div class="cat"><span class="cat-icon">🎬</span><span class="cat-name">Tamil Movies</span></div>
-      <div class="cat"><span class="cat-icon">📺</span><span class="cat-name">Tamil Web Series</span></div>
-      <div class="cat"><span class="cat-icon">🇮🇳</span><span class="cat-name">India Live TV</span></div>
-      <div class="cat"><span class="cat-icon">🌐</span><span class="cat-name">English Live TV</span></div>
-      <div class="cat"><span class="cat-icon">🎥</span><span class="cat-name">English Movies</span></div>
-      <div class="cat"><span class="cat-icon">🎞️</span><span class="cat-name">English Series & Shows</span></div>
-      <div class="cat"><span class="cat-icon">🎬</span><span class="cat-name">Movie Channels</span></div>
-      <div class="cat"><span class="cat-icon">📰</span><span class="cat-name">News</span></div>
-      <div class="cat"><span class="cat-icon">⚽</span><span class="cat-name">Sports</span></div>
-      <div class="cat"><span class="cat-icon">🎵</span><span class="cat-name">Music</span></div>
-      <div class="cat"><span class="cat-icon">👶</span><span class="cat-name">Kids</span></div>
+      <div class="cat">🎭 Tamil Live TV</div>
+      <div class="cat">🎬 Tamil Movies</div>
+      <div class="cat">📺 Tamil Series & Serials</div>
+      <div class="cat">🇮🇳 India Live TV</div>
+      <div class="cat">🌐 English Live TV</div>
+      <div class="cat">🎥 English Movies</div>
+      <div class="cat">🎞 English Series & Shows</div>
+      <div class="cat">🎬 Movie Channels</div>
+      <div class="cat">📰 News</div>
+      <div class="cat">⚽ Sports</div>
+      <div class="cat">🎵 Music</div>
+      <div class="cat">👶 Kids</div>
+      <div class="cat">🎙 Documentary</div>
+      <div class="cat">✏️ Animation</div>
     </div>
   </div>
+
   <div class="card">
-    <div class="card-title">How to add in STB app</div>
-    <div class="steps">
-      <div class="step"><div class="num">1</div><p>Open STB app on Samsung TV</p></div>
-      <div class="step"><div class="num">2</div><p>Go to <span class="badge">Settings</span> → <span class="badge">Add Playlist</span></p></div>
-      <div class="step"><div class="num">3</div><p>Choose <span class="badge">M3U URL</span> as type</p></div>
-      <div class="step"><div class="num">4</div><p>Paste the URL above and save</p></div>
-      <div class="step"><div class="num">5</div><p>Browse channels by category — Tamil, Movies, Series all separated</p></div>
+    <div class="label">Steps — add to STB app on Samsung TV</div>
+    <ol class="steps">
+      <li>Open STB app on your Samsung TV</li>
+      <li>Go to Settings → Playlist → Add Playlist</li>
+      <li>Select <b>M3U URL</b> as the type</li>
+      <li>Paste the URL above and save</li>
+      <li>Channels load grouped by category</li>
+    </ol>
+    <div class="note">
+      ⚠️ Some channels will be offline — this is normal for free public IPTV. The playlist auto-refreshes every hour. Dead streams are filtered automatically.
     </div>
-    <div class="note">Dead/offline streams are automatically filtered out. Playlist refreshes every hour from iptv-org.</div>
   </div>
 </div>
 <script>
-  document.getElementById('m3u-url').textContent = window.location.origin + '/api/playlist';
-  function copyURL() {
-    navigator.clipboard.writeText(window.location.origin + '/api/playlist').then(() => {
-      const b = document.getElementById('copy-btn');
-      b.textContent = 'Copied!'; b.classList.add('done');
-      setTimeout(() => { b.textContent = 'Copy'; b.classList.remove('done'); }, 2000);
-    });
+  const base = location.origin;
+  document.getElementById('u1').textContent = base + '/api/playlist';
+  document.getElementById('u2').textContent = base + '/api/playlist.m3u';
+  function copy(id, btn) {
+    navigator.clipboard.writeText(document.getElementById(id).textContent);
+    btn.textContent = 'Copied!'; btn.classList.add('ok');
+    setTimeout(()=>{ btn.textContent = btn.classList.contains('btn') ? 'Copy URL' : 'Copy .m3u version (if above doesn\'t work)'; btn.classList.remove('ok'); }, 2000);
   }
 </script>
 </body>

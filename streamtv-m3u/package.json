@@ -1,9 +1,6 @@
 {
-  "name": "streamtv-m3u-proxy",
+  "name": "streamtv-m3u",
   "version": "1.0.0",
-  "description": "M3U playlist proxy for Tamil + English IPTV channels",
   "private": true,
-  "engines": {
-    "node": ">=18"
-  }
+  "engines": { "node": "20.x" }
 }
